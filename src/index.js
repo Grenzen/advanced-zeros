@@ -9,8 +9,8 @@ function makePrime(base) {
 
   let max = Math.floor(Math.sqrt(base));
 
-  	for (let i = max; i > 2; i--) {
-    	if (base % i == 0) {
+  	for (let i = max; i > 1; i--) {
+    	if (base % i == 0 && base !== 2) {
     		base = base / i;
     	} else if ( base / i === 1 ) {
     		return base;
@@ -19,22 +19,19 @@ function makePrime(base) {
   return base;
 }
     
-function powerOfDummy(number, i) {
-    
-  let resultCount = 0;
-  let j = 1;
-  let powerC = 1;
-    
-    
-  while ( Math.floor(number/powerC) > 1 ) {
-    
-    powerC = ~~(i ** j);
-    resultCount = resultCount + Math.floor(number/powerC);
-    
-    j++;
-  }
-  return (~~(resultCount)); 
+function powerOfDummy(number, base) {
+	let power = ~~(getBaseLog(base, number));
+
+	let resultCount = 0,
+		powerC = 1;
+
+	for(i = 1; i <= power; i++) {
+		powerC = ~~(base ** i);
+		resultCount = resultCount + Math.floor(number/powerC);
+	}
+	return resultCount;
 }
+
     
 function getBaseLog(x, y) {
   return Math.log(y) / Math.log(x);
